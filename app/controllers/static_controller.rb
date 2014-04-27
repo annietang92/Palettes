@@ -23,7 +23,7 @@ class StaticController < ApplicationController
     require 'open_uri_redirections'
 
     #url
-    url = 'twitter.com'
+    url = 'cbs.com'
     url_redir = ''
 
     url = "http://" + url
@@ -104,7 +104,10 @@ class StaticController < ApplicationController
     end
 
     #make palette object
-    palette = Paleta::Palette.new()
+    palette_r = Paleta::Palette.new()
+    palette_g = Paleta::Palette.new()
+    palette_b = Paleta::Palette.new()
+    palette_blk = Paleta::Palette.new()
 
     for hex in all_hex
       puts hex
@@ -112,13 +115,24 @@ class StaticController < ApplicationController
         color = Paleta::Color.new(:hex, hex)
         puts color.hex
       rescue
-        puts "ERROR"
-        puts " "
         next
       end
-      palette << color
+      if color.red >= color.green && color.red > color.blue
+        palette_r << color
+      elsif color.green > color.red && color.green >= color.blue
+        palette_g << color
+      elsif color.blue >= color.red && color.blue > color.green
+        palette_b << color
+      else
+        palette_blk << color
+      end      
     end
-    @colors = palette.to_array(:hex)
+    palette_r.sort! { |a,b| a.hex <=> b.hex }
+    palette_g.sort! { |a,b| a.hex <=> b.hex }
+    palette_b.sort! { |a,b| a.hex <=> b.hex }
+    palette_blk.sort! { |a,b| a.hex <=> b.hex }
+
+    @colors = palette_r.to_array(:hex) + palette_g.to_array(:hex) + palette_b.to_array(:hex) + palette_blk.to_array(:hex)
 
   end
 end
