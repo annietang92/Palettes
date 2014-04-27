@@ -8,8 +8,16 @@ group :development do
   gem 'rails_layout'
 end
 
+#color objects
+gem 'paleta', '~> 0.2.0'
+
+#pdfkit
+gem 'pdfkit', '~> 0.6.2'
+
 # http client
 gem 'httpclient', '~> 2.3.4.1'
+
+gem 'open_uri_redirections'
 
 # HTML parser
 gem 'nokogiri'
