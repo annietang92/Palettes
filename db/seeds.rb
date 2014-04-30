@@ -36,7 +36,7 @@ single_hex.each do |hex1|
       hex = hex.upcase
       begin
         color = Paleta::Color.new(:hex, hex)
-        Color.find_or_create_by(hex: color.hex, r: color.red, g: color.green, b: color.blue, hue: color.hue, sat: color.saturation, val: color.lightness)
+        Color.find_or_create_by(hex: color.hex.to_s, r: color.red.to_i, g: color.green.to_i, b: color.blue.to_i, hue: color.hue.to_i, sat: color.saturation.to_i, val: color.lightness.to_i)
       rescue
         next
       end
