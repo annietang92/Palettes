@@ -3,7 +3,7 @@ class Color < ActiveRecord::Base
   has_many :relationships
 
   def self.top_color
-    top = Color.all.find_all {|a| a.urls.count > 5 && !a.is_black?}
+    top = Color.all.find_all {|a| a.urls.count > 20 && !a.is_black?}
     # top = Color.all
     top.sort! { |a,b| a.urls.count <=> b.urls.count }
     return top.reverse

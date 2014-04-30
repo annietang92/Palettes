@@ -1,9 +1,9 @@
 
   <div class="top_colors">
-    <h3>Top Colors of the Web:</h3>
+    <h4><strong>TOP WEB COLORS</strong></h4>
   <%for color in @colors%>
     <div style="float:left;">
-      <div style="margin:30px;border-radius:50%;width:80px;height:80px;background-color:#<%=color.hex%>">
+      <div style="margin:35px;border-radius:50%;width:70px;height:70px;background-color:#<%=color.hex%>">
       </div>
       <%=color.urls.count%>
       <br>
@@ -16,6 +16,7 @@
       B: <%=color.b%>
       <br>
       <%for url in color.urls%>
+
         <%display = ''%>
         <%if url.url.match('http://www.')%>
           <%display = url.url%>
@@ -32,7 +33,9 @@
         <%else%>
           <%display = url.url%>
         <%end%>
-        <h6><%=display.truncate(20)%><br></h6>
+
+
+        <h6><%=link_to display.truncate(20), url%><br></h6>
       <%end%>
     </div>
   <%end%>
