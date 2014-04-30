@@ -14,6 +14,11 @@
     <h1 class="logo"><a href="/">palettes</a></h1>
     <h3>quickly visualize and analyze the color palette of a website</h3>
   </div>
+  <div class="search">
+  <%= form_for(:url, url: url_index_path) do |f| %>
+    <%= f.text_field :url, class: 'form-control', placeholder: 'your url here...', autofocus: true%>
+  <%end%>
+</div>
 
     <%= yield %>
 

@@ -1,7 +1,8 @@
-<div class="search">
-  <%= form_for(:url, url: url_index_path) do |f| %>
-    <%= f.text_field :url, class: 'form-control', placeholder: 'your url here...', autofocus: true%>
+
+  <div class="top_colors">
+    <h3>Top Colors of the Web:</h3>
+  <%for color in @colors%>
+    <div style="margin:20px;border-radius:50%;width:60px;height:60px;float:left;background-color:#<%=color.hex%>">
+    </div>
   <%end%>
 </div>
-<%=@hello%>
-

@@ -11,9 +11,6 @@ end
 #color objects
 gem 'paleta', '~> 0.2.0'
 
-#pdfkit
-gem 'pdfkit', '~> 0.6.2'
-
 # http client
 gem 'httpclient', '~> 2.3.4.1'
 
@@ -21,9 +18,6 @@ gem 'open_uri_redirections'
 
 # HTML parser
 gem 'nokogiri'
-
-#CSS parser
-gem 'css_parser', '~> 1.3.5'
 
 # Use HAML for stylesheets
 gem 'haml', '~> 4.0.5'

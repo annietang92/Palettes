@@ -67,3 +67,11 @@ h1.logo{
 .search input:focus, textarea:focus {
   outline: none; 
 }
+
+.top_colors{
+  width: 100%;
+  max-width:1000px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 50px;
+}

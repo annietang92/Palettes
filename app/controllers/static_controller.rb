@@ -2,6 +2,7 @@ class StaticController < ApplicationController
 
 
   def index
+    @colors = Color.top_color[0..9]
   end
 
   def show
