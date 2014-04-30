@@ -2,6 +2,8 @@ class Color < ActiveRecord::Base
   has_many :urls, through: :relationships
   has_many :relationships
 
+  validates :hex, presence: true, uniqueness: true
+
   def self.top_color
     top = Color.all.find_all {|a| a.urls.count > 20 && !a.is_black?}
     # top = Color.all
