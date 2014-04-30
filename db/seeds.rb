@@ -33,9 +33,13 @@ single_hex.each do |hex1|
   single_hex.each do |hex2|
     single_hex.each do |hex3|
       hex = hex1 + hex1 + hex2 + hex2 + hex3 + hex3
-      puts hex
+      hex = hex.upcase
+      begin
         color = Paleta::Color.new(:hex, hex)
         Color.find_or_create_by(hex: color.hex, r: color.red, g: color.green, b: color.blue, hue: color.hue, sat: color.saturation, val: color.lightness)
+      rescue
+        next
+      end
     end
   end
 end
