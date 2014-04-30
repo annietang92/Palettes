@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20140429232200) do
 
   create_table "urls", force: true do |t|
     t.string   "url"
+    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

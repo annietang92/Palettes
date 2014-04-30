@@ -42,10 +42,21 @@ h1.logo{
   font-size:100px;
 }
 
+h1.logo_sm{
+  font-size:30px;
+  font-weight: bold;
+}
+
 .title{
   width: 100%;
   text-align: center;
   padding-bottom: 40px;
+}
+
+.title_sm{
+  width: 100%;
+  text-align: center;
+  padding-bottom: 10px;
 }
 
 .search{
@@ -74,4 +85,8 @@ h1.logo{
   margin: 0 auto;
   text-align: center;
   margin-top: 50px;
+}
+
+.show_colors{
+  padding-top: 60px;
 }

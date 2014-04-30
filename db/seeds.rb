@@ -18,37 +18,24 @@
 #   updated_at: datetime)
 
 
+require 'paleta'
+
 single_hex = []
 
-(0..9).each do |n1|
-  (0..9).each do |n2|
-    hex = n1.to_s + n2.to_s
-    single_hex << hex unless single_hex.include?(hex)
-  end
-  ('a'..'f').each do |n2|
-    hex = n1.to_s + n2.to_s
-    single_hex << hex unless single_hex.include?(hex)
-  end
+(0..9).each do |hex|
+  single_hex << hex.to_s 
 end
-
-('a'..'f').each do |n1|
-  (0..9).each do |n2|
-    hex = n1.to_s + n2.to_s
-    single_hex << hex unless single_hex.include?(hex)
-  end
-  ('a'..'f').each do |n2|
-    hex = n1.to_s + n2.to_s
-    single_hex << hex unless single_hex.include?(hex)
-  end
+('a'..'f').each do |hex|
+  single_hex << hex
 end
-
-puts single_hex
 
 single_hex.each do |hex1|
   single_hex.each do |hex2|
     single_hex.each do |hex3|
-      hex = hex1 + hex2 + hex3
-        all_hex << hex unless all_hex.include?(hex)
+      hex = hex1 + hex1 + hex2 + hex2 + hex3 + hex3
+      puts hex
+        color = Paleta::Color.new(:hex, hex)
+        Color.find_or_create_by(hex: color.hex, r: color.red, g: color.green, b: color.blue, hue: color.hue, sat: color.saturation, val: color.lightness)
     end
   end
 end

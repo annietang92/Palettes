@@ -2,7 +2,38 @@
   <div class="top_colors">
     <h3>Top Colors of the Web:</h3>
   <%for color in @colors%>
-    <div style="margin:20px;border-radius:50%;width:60px;height:60px;float:left;background-color:#<%=color.hex%>">
+    <div style="float:left;">
+      <div style="margin:30px;border-radius:50%;width:80px;height:80px;background-color:#<%=color.hex%>">
+      </div>
+      <%=color.urls.count%>
+      <br>
+      #<%=color.hex%>
+      <br>
+      R: <%=color.r%>
+      <br>
+      G: <%=color.g%>
+      <br>
+      B: <%=color.b%>
+      <br>
+      <%for url in color.urls%>
+        <%display = ''%>
+        <%if url.url.match('http://www.')%>
+          <%display = url.url%>
+          <%display[0..10] = ''%>
+        <%elsif url.url.match('https://www.')%>
+          <%display = url.url%>
+          <%display[0..11] = ''%>
+        <%elsif url.url.match('http://')%>
+          <%display = url.url%>
+          <%display[0..6] = ''%>
+        <%elsif url.url.match('https://')%>
+          <%display = url.url%>
+          <%display[0..7] = ''%>
+        <%else%>
+          <%display = url.url%>
+        <%end%>
+        <h6><%=display.truncate(20)%><br></h6>
+      <%end%>
     </div>
   <%end%>
 </div>

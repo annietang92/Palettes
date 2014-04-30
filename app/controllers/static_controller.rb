@@ -2,16 +2,11 @@ class StaticController < ApplicationController
 
 
   def index
-    @colors = Color.top_color[0..9]
+    @colors = Color.top_color[0..6]
+    @home = true
   end
 
   def show
-    # require 'rubygems'
-    # require 'nokogiri'
-    # require 'css_parser'
-    # require 'httpclient'
-    # require 'open-uri'
-    # require 'open_uri_redirections'
     single_hex = []
     all_hex = []
     @url = Url.new

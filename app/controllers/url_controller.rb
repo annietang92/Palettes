@@ -3,22 +3,17 @@ class UrlController < ApplicationController
     @url = Url.find(params[:id])
     @all_colors = @url.colors
 
-    palette_r = Paleta::Palette.new()
-    palette_g = Paleta::Palette.new()
-    palette_b = Paleta::Palette.new()
-    palette_blk = Paleta::Palette.new()
+    palette_r = []
+    palette_g = []
+    palette_b = []
+    palette_blk = []
 
-    for c in @all_colors
-      begin 
-        color = Paleta::Color.new(:hex, c.hex)
-      rescue
-        next
-      end
-      if color.red >= color.green && color.red > color.blue
+    for color in @all_colors
+      if color.r >= color.g && color.r > color.b
         palette_r << color
-      elsif color.green > color.red && color.green >= color.blue
+      elsif color.g > color.r && color.g >= color.b
         palette_g << color
-      elsif color.blue >= color.red && color.blue > color.green
+      elsif color.b >= color.r && color.b > color.g
         palette_b << color
       else
         palette_blk << color
@@ -30,7 +25,7 @@ class UrlController < ApplicationController
     palette_b.sort! { |a,b| a.hex <=> b.hex }
     palette_blk.sort! { |a,b| a.hex <=> b.hex }
 
-    @colors = palette_r.to_array(:hex) + palette_g.to_array(:hex) + palette_b.to_array(:hex) + palette_blk.to_array(:hex)
+    @colors = palette_r + palette_g + palette_b + palette_blk
   end
 
   def create
@@ -49,8 +44,13 @@ class UrlController < ApplicationController
       url[-1] = ''
     end
 
-    open(url, :allow_redirections => :safe) do |r|
-      url_redir = r.base_uri.to_s
+    begin
+      open(url, :allow_redirections => :safe) do |r|
+        url_redir = r.base_uri.to_s
+      end
+    rescue
+      redirect_to root_path
+      return
     end
 
     @url.url = url_redir
@@ -108,12 +108,17 @@ class UrlController < ApplicationController
       for h in hex
         # h[0..17] = ''
         h[0] = ''
+        puts h
         if h.length == 3
-          h = h[0] + h[0] + h[1] + h[1] + h[2] + h[2]
+          h = h[0] + h[0] + h[1] + h[1] + h[2] + h[2] 
+        elsif h.length == 6     
+          h = h[0] + h[0] + h[2] + h[2] + h[4] + h[4]
+        else
+          hex = hex.delete(h)
+          next
         end
-         
-         @color = Color.find_or_create_by(hex: h.downcase)
-         @relationship = Relationship.find_or_create_by(url_id: @url.id, color_id: @color.id)
+        @color = Color.find_by(hex: h.upcase)
+        @relationship = Relationship.find_or_create_by(url_id: @url.id, color_id: @color.id)
       end
     end
 
