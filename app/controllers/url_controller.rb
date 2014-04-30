@@ -111,6 +111,7 @@ class UrlController < ApplicationController
         if h.length == 3
           h = h[0] + h[0] + h[1] + h[1] + h[2] + h[2]
         end
+         
          @color = Color.find_or_create_by(hex: h.downcase)
          @relationship = Relationship.find_or_create_by(url_id: @url.id, color_id: @color.id)
       end
