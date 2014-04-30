@@ -1,7 +1,7 @@
-<h1>palettes</h1>
+<div class="search">
+  <%= form_for(:url, url: url_index_path) do |f| %>
+    <%= f.text_field :url, class: 'form-control', placeholder: 'your url here...', autofocus: true%>
+  <%end%>
+</div>
+<%=@hello%>
 
-<%for color in @colors%>
-  <div style="margin:5px;border-radius:50%;width:30px;height:30px;float:left;background-color:#<%=color%>">
-  </div>
-<!--   <p><%=color%></p> -->
-<%end%>

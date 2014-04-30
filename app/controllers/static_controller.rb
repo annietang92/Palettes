@@ -1,29 +1,22 @@
 class StaticController < ApplicationController
 
-  def show
-    color = Paleta::Color.new(:hex, "5EA1EB")
-    puts color.red 
-    puts color.green
-    puts color.blue
-    puts color.hue
-    puts color.saturation
-    puts color.lightness
-    puts color.hex
 
-    @colors = []
-    @colors << color.hex
-
-  end
   def index
-    require 'rubygems'
-    require 'nokogiri'
-    require 'css_parser'
-    require 'httpclient'
-    require 'open-uri'
-    require 'open_uri_redirections'
+  end
+
+  def show
+    # require 'rubygems'
+    # require 'nokogiri'
+    # require 'css_parser'
+    # require 'httpclient'
+    # require 'open-uri'
+    # require 'open_uri_redirections'
+    single_hex = []
+    all_hex = []
+    @url = Url.new
 
     #url
-    url = 'cbs.com'
+    url = 'facebook.com'
     url_redir = ''
 
     url = "http://" + url
@@ -44,7 +37,6 @@ class StaticController < ApplicationController
     #populate array for css files
     links.each do |link|
       if link.attribute('rel').to_s == 'stylesheet'
-        puts link
         if url.match(/web.archive.org/)
           css_files << 'http://web.archive.org' + link.attribute('href').to_s
         elsif link.attribute('href').to_s[0..3] != "http"
@@ -76,26 +68,22 @@ class StaticController < ApplicationController
 
     css_files.each do |file|
       #open the css links
-      parser = CssParser::Parser.new
       begin
-        parser.load_uri!(file)
-      rescue 
+        css_string = open(file).read
+      rescue
         next
       end
 
-      #format the css
-      css_string = parser.to_s
-
+      # hex = css_string.scan(/background-color:#[0-9a-fA-F]{3,6}/)
       hex = css_string.scan(/#[0-9a-fA-F]{3,6}/)
+
 
       # puts hex
       for h in hex
+        # h[0..17] = ''
         h[0] = ''
         if h.length == 3
-          r = h[0]
-          g = h[1]
-          b = h[2]
-          h = r + r + g + g + b + b
+          h = h[0] + h[0] + h[1] + h[1] + h[2] + h[2]
         end
         unless all_hex.include?(h.downcase)
            all_hex << h.downcase
@@ -110,10 +98,8 @@ class StaticController < ApplicationController
     palette_blk = Paleta::Palette.new()
 
     for hex in all_hex
-      puts hex
       begin 
         color = Paleta::Color.new(:hex, hex)
-        puts color.hex
       rescue
         next
       end
@@ -133,6 +119,6 @@ class StaticController < ApplicationController
     palette_blk.sort! { |a,b| a.hex <=> b.hex }
 
     @colors = palette_r.to_array(:hex) + palette_g.to_array(:hex) + palette_b.to_array(:hex) + palette_blk.to_array(:hex)
-
+    
   end
 end
