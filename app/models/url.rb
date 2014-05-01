@@ -2,6 +2,11 @@ class Url < ActiveRecord::Base
   has_many :colors, through: :relationships
   has_many :relationships
 
+  has_many :urltypes, through: :url_type_relationships
+  has_many :url_type_relationships
+
+  attr_accessor :urltype
+
   def display_name
     display=''
 

@@ -9,6 +9,9 @@
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
+  <div class="color_index">
+      <a href="/color"><h6><strong>Hex Index</strong></h6></a>
+    </div>
   <div class="container">
 
     <%if @home%>
@@ -24,8 +27,13 @@
 
 
     <div class="search">
+      <% flash.each do |name, msg| %>
+        <h5>*<%=msg%></h5>
+      <%end%>
       <%= form_for(:url, url: url_index_path) do |f| %>
-      <%= f.text_field :url, class: 'form-control', placeholder: 'your url here...', autofocus: true%>
+      <%= f.text_field :url, class: 'form-control', placeholder: 'your url here...',autofocus: true%>
+      <%= f.select :urltype, options_for_select(['Select Category']+Urltype.pluck(:name)), class: 'form-control'%>
+
       <%end%>
     </div>
 

@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140501005559) do
+ActiveRecord::Schema.define(version: 20140501195715) do
 
   create_table "colors", force: true do |t|
     t.string   "hex"
     t.integer  "r"
     t.integer  "g"
     t.integer  "b"
-    t.string   "hue"
+    t.integer  "hue"
     t.integer  "val"
     t.integer  "sat"
     t.datetime "created_at"
@@ -38,9 +38,21 @@ ActiveRecord::Schema.define(version: 20140501005559) do
     t.datetime "updated_at"
   end
 
+  create_table "url_type_relationships", force: true do |t|
+    t.integer  "url_id"
+    t.integer  "urltype_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "urls", force: true do |t|
     t.string   "url"
-    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "urltypes", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

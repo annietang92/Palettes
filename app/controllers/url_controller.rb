@@ -31,6 +31,13 @@ class UrlController < ApplicationController
   def create
     @url = Url.new(url_params)
 
+    if !Urltype.pluck(:name).include?(@url.urltype)
+      flash[:notice] = "Please select the category of this website"
+      redirect_to root_path
+      return
+    end
+
+    type = Urltype.find_by(name: @url.urltype)
     #get the redirect
     url_redir = ''
 
@@ -49,6 +56,7 @@ class UrlController < ApplicationController
         url_redir = r.base_uri.to_s
       end
     rescue
+      flash[:notice] = "Unable to parse this url :("
       redirect_to root_path
       return
     end
@@ -56,8 +64,10 @@ class UrlController < ApplicationController
     @url.url = url_redir
     if Url.find_by(url: @url.url).nil?
       @url.save
+      @url.url_type_relationships.find_or_create_by(urltype_id: type.id)
     else
       @url = Url.find_by(url: @url.url)
+      @url.url_type_relationships.find_or_create_by(urltype_id: type.id)
       redirect_to url_path(@url)
       return
     end
@@ -128,6 +138,6 @@ class UrlController < ApplicationController
 
   private
     def url_params
-      params.require(:url).permit(:url)
+      params.require(:url).permit(:url, :urltype)
     end
 end
