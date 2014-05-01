@@ -2,7 +2,10 @@ class StaticController < ApplicationController
 
 
   def index
-    @colors = Color.top_color[0..6]
+    @colors = []
+    for color in TopCache.all
+      @colors << Color.find(color.color_id)
+    end
     @home = true
   end
 

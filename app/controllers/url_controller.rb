@@ -20,10 +20,10 @@ class UrlController < ApplicationController
       end      
     end
 
-    palette_r.sort! { |a,b| a.hex <=> b.hex }
-    palette_g.sort! { |a,b| a.hex <=> b.hex }
-    palette_b.sort! { |a,b| a.hex <=> b.hex }
-    palette_blk.sort! { |a,b| a.hex <=> b.hex }
+    palette_r.sort! #{ |a,b| a.hex <=> b.hex }
+    palette_g.sort! #{ |a,b| a.hex <=> b.hex }
+    palette_b.sort! #{ |a,b| a.hex <=> b.hex }
+    palette_blk.sort! #{ |a,b| a.hex <=> b.hex }
 
     @colors = palette_r + palette_g + palette_b + palette_blk
   end
@@ -117,12 +117,12 @@ class UrlController < ApplicationController
           hex = hex.delete(h)
           next
         end
-        @color = Color.find_by(hex: h.upcase)
-        @relationship = Relationship.find_or_create_by(url_id: @url.id, color_id: @color.id)
+        colorid = Color.convert_hex_to_id(h)
+        @url.relationships.find_or_create_by(color_id: colorid)
+        #Relationship.find_or_create_by(url_id: @url.id, color_id: @color.id)
       end
     end
 
-    @hello = "hello"
     redirect_to url_path(@url)
   end
 

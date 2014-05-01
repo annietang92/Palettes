@@ -11,6 +11,17 @@ class Color < ActiveRecord::Base
     return top.reverse
   end
 
+  def self.convert_hex_to_id(hex)
+    #convert to hex
+    #a = 10
+    #f = 15
+    first = hex[0].to_i(16)
+    second = hex[2].to_i(16)
+    third = hex[4].to_i(16)
+
+    return (256 * first) + (16 * second) + third + 1
+  end
+
   def is_black?
     r = self.hex[0..1]
     g = self.hex[2..3]

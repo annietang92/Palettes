@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140429232200) do
+ActiveRecord::Schema.define(version: 20140501005559) do
 
   create_table "colors", force: true do |t|
     t.string   "hex"
@@ -27,6 +27,12 @@ ActiveRecord::Schema.define(version: 20140429232200) do
 
   create_table "relationships", force: true do |t|
     t.integer  "url_id"
+    t.integer  "color_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "top_caches", force: true do |t|
     t.integer  "color_id"
     t.datetime "created_at"
     t.datetime "updated_at"
