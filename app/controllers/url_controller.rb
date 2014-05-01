@@ -23,7 +23,7 @@ class UrlController < ApplicationController
     palette_r.sort! #{ |a,b| a.hex <=> b.hex }
     palette_g.sort! #{ |a,b| a.hex <=> b.hex }
     palette_b.sort! #{ |a,b| a.hex <=> b.hex }
-    palette_blk.sort! #{ |a,b| a.hex <=> b.hex }
+    palette_blk.sort! # { |a,b| a.hex <=> b.hex }
 
     @colors = palette_r + palette_g + palette_b + palette_blk
   end
