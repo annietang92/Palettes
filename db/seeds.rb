@@ -24,6 +24,6 @@ single_hex.each do |hex1|
   end
 end
 
-for color in Color.top_color[0..6]
-  TopCache.create(color_id:color.id)
-end
+# for color in Color.top_color[0..6]
+#   TopCache.create(color_id:color.id)
+# end
