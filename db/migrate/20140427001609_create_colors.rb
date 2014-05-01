@@ -5,7 +5,7 @@ class CreateColors < ActiveRecord::Migration
       t.integer :r
       t.integer :g 
       t.integer :b
-      t.string :hue
+      t.integer :hue
       t.integer :val
       t.integer :sat
 
