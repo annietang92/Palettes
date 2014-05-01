@@ -35,6 +35,7 @@ types = [
 "Sports",
 "Travel",
 "Education",
+"Technology",
 "Deals",
 "Shopping",
 "Personal",
