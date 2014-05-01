@@ -1,8 +1,9 @@
 class ColorController < ApplicationController
-  def new
-    @hello = 'lalala'
-
+  def index
+    @colors = Color.all
+    @colors.sort! { |a,b| b.hue <=> a.hue }
   end
+
   def show
     @color = Color.find(params[:id])
   end

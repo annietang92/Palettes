@@ -1,4 +1,44 @@
- <div class="color_show"> 
+ <div class="row">
+  <div class="color_show"> 
   <div style="margin:10px;border-radius:50%;width:300px;height:300px;float:left;background-color:#<%=@color.hex%>">
   </div>
+
+  <div class="color_description">
+    <h4>Urls Count: <strong><%=@color.urls.count%></strong></h4>
+    <h4>Hex Value: <strong>#<%=@color.hex%></strong></h4>
+    <h4>RGB Value: <strong>(<%=@color.r%>,<%=@color.g%>,<%=@color.b%>)</strong></h4>
+    <h4>Saturation: <strong><%=@color.sat%></strong></h4>
+    <h4>Value: <strong><%=@color.val%></strong></h4>
+  </div>
+
+  <div class="color_urls">
+    <ol class="two_columns">
+    <%for url in @color.urls%>
+
+        <%display = ''%>
+        <%if url.url.match('http://www.')%>
+          <%display = url.url%>
+          <%display[0..10] = ''%>
+        <%elsif url.url.match('https://www.')%>
+          <%display = url.url%>
+          <%display[0..11] = ''%>
+        <%elsif url.url.match('http://')%>
+          <%display = url.url%>
+          <%display[0..6] = ''%>
+        <%elsif url.url.match('https://')%>
+          <%display = url.url%>
+          <%display[0..7] = ''%>
+        <%else%>
+          <%display = url.url%>
+        <%end%>
+
+
+        <li><h5><%=link_to display.truncate(20), url%><br></h5></li>
+      <%end%>
+    </ol>
+    
+  </div>
+
+
+</div>
 </div>
