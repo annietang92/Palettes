@@ -1,45 +1,102 @@
  <div class="row">
   <div class="color_show"> 
-  <div style="margin:10px;border-radius:50%;width:300px;height:300px;float:left;background-color:#<%=@color.hex%>">
-  </div>
+    <div style="margin:10px;border-radius:50%;width:200px;height:200px;float:left;background-color:#<%=@color.hex%>">
+    </div>
 
-  <div class="color_description">
-    <h4>Urls Count: <strong><%=@color.urls.count%></strong></h4>
-    <h4>Hex Value: <strong>#<%=@color.hex%></strong></h4>
-    <h4>RGB Value: <strong>(<%=@color.r%>,<%=@color.g%>,<%=@color.b%>)</strong></h4>
-    <h4>Hue: <strong><%=@color.hue%></h4>
-    <h4>Saturation: <strong><%=@color.sat%></strong></h4>
-    <h4>Value: <strong><%=@color.val%></strong></h4>
-  </div>
+    <div class="color_description">
+      <h4>Urls Count: <strong><%=@color.urls.count%></strong></h4>
+      <h4>Hex Value: <strong>#<%=@color.hex%></strong></h4>
+      <h4>RGB Value: <strong>(<%=@color.r%>,<%=@color.g%>,<%=@color.b%>)</strong></h4>
+      <h4>Hue: <strong><%=@color.hue%></h4>
+      <h4>Value: <strong><%=@color.val%></strong></h4>
+    </div>
 
-  <div class="color_urls">
-    <ol class="two_columns">
-    <%for url in @color.urls%>
-
-        <%display = ''%>
-        <%if url.url.match('http://www.')%>
-          <%display = url.url%>
-          <%display[0..10] = ''%>
-        <%elsif url.url.match('https://www.')%>
-          <%display = url.url%>
-          <%display[0..11] = ''%>
-        <%elsif url.url.match('http://')%>
-          <%display = url.url%>
-          <%display[0..6] = ''%>
-        <%elsif url.url.match('https://')%>
-          <%display = url.url%>
-          <%display[0..7] = ''%>
-        <%else%>
-          <%display = url.url%>
+    <div class="color_urls">
+      <ol class="two_columns">
+        <%for url in @color.urls%>
+        <li><h6><%=link_to url.display_name.truncate(20), url%><br></h6></li>
         <%end%>
+      </ol>
+    </div>
+  </div>
+</div>
 
+<div class="row">
+  <div class="color_details"> 
+      <%for color in @spectrum%>
+        <a href="/color/<%=Color.convert_hex_to_id(color)%>">
+          <%if color == @color.hex%>
+            <div class="spectrum" style="width:6px;border:4px solid black;height:40px;float:left;background-color:#<%=color%>">
+            </div>
+          <%else%>
+            <div class="spectrum" style="width:6px;margin-bottom:10px;border-left:4px solid #<%=color%>; border-right:4px solid #<%=color%>;height:40px;float:left;background-color:#<%=color%>">
+            </div>
+          <%end%>
+      </a>
+    <%end%>
+  </div>
+</div>
 
-        <li><h5><%=link_to display.truncate(20), url%><br></h5></li>
+<%if !@analogous.nil? && !@comp.nil? && !@split.nil? && !@triad.nil? && !@tetrad.nil?%>
+
+  <div class="row">
+    <div class="color_details"> 
+      <h3><strong>Analogous</strong><h3>
+        <%for color in @analogous%>
+          <a href="/color/<%=Color.convert_hex_to_id(color)%>">
+            <div style="margin:20px;border-radius:50%;width:40px;height:40px;float:left;background-color:#<%=color%>">
+            </div>
+          </a>
       <%end%>
-    </ol>
-    
+    </div>
   </div>
 
+  <div class="row">
+    <div class="color_details"> 
+      <h3><strong>Complementary</strong><h3>
+        <%for color in @comp%>
+          <a href="/color/<%=Color.convert_hex_to_id(color)%>">
+            <div style="margin:20px;border-radius:50%;width:40px;height:40px;float:left;background-color:#<%=color%>">
+            </div>
+          </a>
+      <%end%>
+    </div>
+  </div>
 
-</div>
-</div>
+  <div class="row">
+    <div class="color_details"> 
+      <h3><strong>Split-Complementary</strong><h3>
+        <%for color in @split%>
+          <a href="/color/<%=Color.convert_hex_to_id(color)%>">
+            <div style="margin:20px;border-radius:50%;width:40px;height:40px;float:left;background-color:#<%=color%>">
+            </div>
+          </a>
+      <%end%>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="color_details"> 
+      <h3><strong>Triad</strong><h3>
+        <%for color in @triad%>
+          <a href="/color/<%=Color.convert_hex_to_id(color)%>">
+            <div style="margin:20px;border-radius:50%;width:40px;height:40px;float:left;background-color:#<%=color%>">
+            </div>
+          </a>
+      <%end%>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="color_details"> 
+      <h3><strong>Tetrad</strong><h3>
+        <%for color in @tetrad%>
+          <a href="/color/<%=Color.convert_hex_to_id(color)%>">
+            <div style="margin:20px;border-radius:50%;width:40px;height:40px;float:left;background-color:#<%=color%>">
+            </div>
+          </a>
+      <%end%>
+    </div>
+  </div>
+<%end%>
+

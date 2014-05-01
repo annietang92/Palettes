@@ -18,26 +18,7 @@
       B: <%=color.b%>
       <br>
       <%for url in color.urls%>
-
-        <%display = ''%>
-        <%if url.url.match('http://www.')%>
-          <%display = url.url%>
-          <%display[0..10] = ''%>
-        <%elsif url.url.match('https://www.')%>
-          <%display = url.url%>
-          <%display[0..11] = ''%>
-        <%elsif url.url.match('http://')%>
-          <%display = url.url%>
-          <%display[0..6] = ''%>
-        <%elsif url.url.match('https://')%>
-          <%display = url.url%>
-          <%display[0..7] = ''%>
-        <%else%>
-          <%display = url.url%>
-        <%end%>
-
-
-        <h6><%=link_to display.truncate(20), url%><br></h6>
+        <h6><%=link_to url.display_name.truncate(20), url%><br></h6>
       <%end%>
     </div>
   <%end%>
