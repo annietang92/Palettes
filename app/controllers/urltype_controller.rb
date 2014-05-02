@@ -1,0 +1,2 @@
+class UrltypeController < ApplicationController
+end
