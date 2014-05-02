@@ -176,10 +176,12 @@ h1.logo_sm{
 }
 
 .submit_button{
-  width:40px !important;
+  width: 0;
+  height: 0;
+  /*width:40px !important;
   background-color: #8cc;
   border-bottom: 2px solid #399 !important;
-  cursor: pointer;
+  cursor: pointer;*/
 }
 
 .submit_button:hover{
