@@ -31,8 +31,9 @@
         <h5>*<%=msg%></h5>
       <%end%>
       <%= form_for(:url, url: url_index_path) do |f| %>
-      <%= f.text_field :url, class: 'form-control', placeholder: 'your url here...',autofocus: true%>
+      <%= f.text_field :url, class: 'search_bar', placeholder: 'your url here...',autofocus: true%>
       <%= f.select :urltype, options_for_select(['Select Category']+Urltype.pluck(:name)), class: 'form-control'%>
+      <%= f.submit ">>", class: "submit_button" %>
 
       <%end%>
     </div>
