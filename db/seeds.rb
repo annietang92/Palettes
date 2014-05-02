@@ -24,12 +24,6 @@
 #   end
 # end
 
-TopCache.destroy_all
-
-for color in Color.top_color[0..6]
-  TopCache.create(color_id:color.id)
-end
-
 # types = [
 # "Social Media",
 # "Sports",
@@ -58,4 +52,10 @@ end
 #   t.name = type
 #   t.save
 # end
+
+TopCache.destroy_all
+
+for color in Color.top_color[0..6]
+  TopCache.create(color_id:color.id)
+end
 

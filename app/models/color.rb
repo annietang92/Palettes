@@ -11,6 +11,25 @@ class Color < ActiveRecord::Base
     return top.reverse
   end
 
+  def urls_of(urltype)
+    return self.urls.find_all { |a| a.urltypes.include?(urltype)}
+  end
+
+  def self.top_color(urltype)
+    all_urls = urltype.urls
+    colors = []
+    for url in all_urls
+      if colors != []
+        colors = url.colors
+      else
+        colors = colors + url.colors
+      end
+    end
+    colors = colors.find_all {|a| !a.is_black?}
+    colors.sort! { |a,b| a.urls_of(urltype).count <=> b.urls_of(urltype).count }
+    return colors.reverse
+  end
+
   def self.convert_hex_to_id(hex)
     #convert to hex
     #a = 10

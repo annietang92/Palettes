@@ -162,7 +162,7 @@ h1.logo_sm{
 
 }
 
-.two_columns{
+.four_columns{
   margin:0;
   padding:0;
   columns: 4;
@@ -185,6 +185,20 @@ h1.logo_sm{
 .submit_button:hover{
   background-color: #cee;
   border-bottom: 2px solid #8cc !important;
+  cursor: pointer;
+}
+
+button{
+  border-radius: 2px;
+  padding:5px 20px;
+  background-color: #8cc;
+  border-bottom: 2px solid #399;
+  cursor: pointer;
+}
+
+button:hover{
+  background-color: #cee;
+  border-bottom: 2px solid #8cc;
   cursor: pointer;
 }
 

@@ -1,1 +1,28 @@
-hello!!!!
+ <%for type in @types%>
+  <%if type.urls.count !=0 %>
+     <div class="row">
+      <div class="color_show"> 
+        <h3><strong><%=type.name%></strong><h3>
+          <%@color = Color.top_color(type).first%>
+          <div style="margin:10px;border-radius:50%;width:200px;height:200px;float:left;background-color:#<%=@color.hex%>">
+          </div>
+
+          <div class="color_description">
+            <h4>Urls Count: <strong><%=@color.urls.count%></strong></h4>
+            <h4>Hex Value: <strong>#<%=@color.hex%></strong></h4>
+            <h4>RGB Value: <strong>(<%=@color.r%>,<%=@color.g%>,<%=@color.b%>)</strong></h4>
+            <h4>Hue: <strong><%=@color.hue%></h4>
+            <h4>Value: <strong><%=@color.val%></strong></h4>
+          </div>
+
+        <div class="color_urls">
+          <ol class="four_columns">
+            <%for url in type.urls%>
+            <li><h6><%=link_to url.display_name.truncate(20), url%><br></h6></li>
+            <%end%>
+          </ol>
+        </div>
+      </div>
+    </div>
+  <%end%>
+<%end%>
