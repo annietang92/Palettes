@@ -9,6 +9,7 @@
 
           <div class="color_description">
             <h4>Urls Count: <strong><%=@color.urls.count%></strong></h4>
+            <h4>Type Count: <strong><%=@color.urls_of(type).count%></strong></h4>
             <h4>Hex Value: <strong>#<%=@color.hex%></strong></h4>
             <h4>RGB Value: <strong>(<%=@color.r%>,<%=@color.g%>,<%=@color.b%>)</strong></h4>
             <h4>Hue: <strong><%=@color.hue%></h4>
