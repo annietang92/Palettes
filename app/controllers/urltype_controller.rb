@@ -1,5 +1,5 @@
 class UrltypeController < ApplicationController
   def index
-    @types = Urltype.all
+    @types = [Urltype.first]
   end
 end
