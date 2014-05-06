@@ -15,7 +15,7 @@ class Color < ActiveRecord::Base
     return self.urls.find_all { |a| a.urltypes.include?(urltype)}
   end
 
-  def self.top_color(urltype)
+  def self.top_color_of(urltype)
     all_urls = urltype.urls
     colors = []
     for url in all_urls
