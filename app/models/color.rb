@@ -5,7 +5,7 @@ class Color < ActiveRecord::Base
   validates :hex, presence: true, uniqueness: true
 
   def self.top_color
-    top = Color.all.find_all {|a| a.urls.count > 80 && !a.is_black?}
+    top = Color.all.find_all {|a| a.urls.count > 70 && !a.is_black?}
     # top = Color.all
     top.sort! { |a,b| a.urls.count <=> b.urls.count }
     return top.reverse
