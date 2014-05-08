@@ -20,7 +20,7 @@ class Color < ActiveRecord::Base
     colors = []
     for url in all_urls
       if colors != []
-        colors = [url.colors]
+        colors = url.colors
       else
         colors = colors + url.colors
       end
