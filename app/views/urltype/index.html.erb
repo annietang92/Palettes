@@ -3,7 +3,7 @@
      <div class="row">
       <div class="color_show"> 
         <h3><strong><%=type.name%></strong><h3>
-          <%@color = Color.top_color(type).first%>
+          <%@color = Color.find(TypeCache.where(urltype_id:type.id).first.color_id)%>
           <div style="margin:10px;border-radius:50%;width:200px;height:200px;float:left;background-color:#<%=@color.hex%>">
           </div>
 

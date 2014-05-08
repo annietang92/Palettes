@@ -59,3 +59,13 @@ for color in Color.top_color
   TopCache.create(color_id:color.id)
 end
 
+
+TypeCache.destroy_all
+
+for urltype in Urltype.all
+  colors = Color.top_colors_of(urltype).take(30)
+  for color in colors
+    TypeCache.create(urltype_id:urltype.id, color_id:color.id)
+  end
+end
+
