@@ -1,5 +1,5 @@
  <%for type in @types%>
-  <%if type.urls.count !=0 %>
+  <%if type.urls.count !=0 && !TypeCache.where(urltype_id:type.id).nil?%>
      <div class="row">
       <div class="color_show"> 
         <h3><strong><%=type.name%></strong><h3>
