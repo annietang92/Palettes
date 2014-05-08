@@ -25,7 +25,7 @@ class Color < ActiveRecord::Base
         colors = colors + url.colors
       end
     end
-    colors = colors.find_all {|a| !a.is_black?}
+    colors = colors.find_all {|a| a.urls.count > 30 && !a.is_black?}
     colors.sort! { |a,b| a.urls_of(urltype).count <=> b.urls_of(urltype).count }
     return colors.reverse
   end
